@@ -34,8 +34,49 @@
 .entry-footer {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
+}
+
+// Header
+
+.site-header {
+	display: flex;
+	gap: 1em;
+	justify-content: space-between;
+	margin: 1em 0;
+}
+
+.menu-button-container {
+	text-align: right;
+}
+
+.primary-menu-container {
+	display: none;
+	justify-content: center;
+}
+
+#primary-menu-list {
+	display: flex;
+	flex-direction: column;
+}
+
+#primary-mobile-menu {
+	.open,
+	.close {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 1.5rem;
+		padding: .25em .5em;
+	}
+
+	.close {
+		display: none;
+	}
+}
+
+.sub-menu {
+	display: none;
 }
 
 .site-footer {
@@ -56,6 +97,26 @@
 @media (min-width: 768px) {
 	.home #main {
 		flex-direction: row;
+	}
+
+	.site-header {
+		align-items: center;
+		flex-direction: row;
+		margin: 1em;
+
+		.menu-button-container {
+			display: none;
+		}
+
+		.primary-menu-container {
+			display: flex;
+		}
+
+		#primary-menu-list {
+			display: flex;
+			flex-direction: row;
+			gap: 2em;
+		}
 	}
 	
 	.site-main {

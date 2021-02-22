@@ -18,34 +18,42 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 	 */
 	class WE_Theme {
 
-		const DEBUG_THEME      = true;
-		const THEME_VERSION    = '0.1.0';
+		const DEBUG_THEME   = true;
+		const THEME_VERSION = '0.1.1';
 
+		/**
+		 * Class constructor.
+		 */
 		public function __construct() {
 			\add_theme_support( 'post-thumbnails' );
-
-			\add_action( 'wp_enqueue_scripts', array( $this, 'wet_enqueue_scripts' ) );
-			\add_filter( 'wp_title', array( $this, 'wet_filter_title' ), 10, 2 );
-			\add_filter( 'excerpt_length', array( $this, 'wet_custom_excerpt_length' ) );
-			\add_filter( 'excerpt_more', array( $this, 'wet_except_more' ) );
-			\add_action( 'after_setup_theme', array( $this, 'load_navigation' ) );
+			\add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ) );
+			\add_filter( 'wp_title', array( $this, 'filter_title' ), 10, 2 );
+			\add_filter( 'excerpt_length', array( $this, 'excerpt_length' ) );
+			\add_filter( 'excerpt_more', array( $this, 'except_more' ) );
+			\add_action( 'after_setup_theme', array( $this, 'register_navigation' ) );
 			\add_action( 'widgets_init', array( $this, 'add_widgets' ) );
-	
 		}
 
-		public function wet_enqueue_scripts() {
+		/**
+		 * Enqueue styles and scripts.
+		 *
+		 * If the DEBUG_THEME flag is set use the modification time on the files as the version
+		 * so they will be always reloaded. Otherwise use the version of the theme.
+		 */
+		public function enqueue() {
 			\wp_enqueue_style(
 				'wedeng-style',
 				get_template_directory_uri() . '/dist/css/stylesheet.min.css',
 				array(),
-				WE_Theme::DEBUG_THEME ? filemtime( get_stylesheet_directory() . '/dist/css/stylesheet.min.css' ) : WE_Theme::THEME_VERSION,
+				self::DEBUG_THEME ? filemtime( get_stylesheet_directory() . '/dist/css/stylesheet.min.css' ) : self::THEME_VERSION,
 				'all'
 			);
+
 			\wp_enqueue_script(
 				'wedeng-script',
 				get_template_directory_uri() . '/dist/js/script.min.js',
 				array(),
-				WE_Theme::DEBUG_THEME ? filemtime( get_stylesheet_directory() . '/dist/js/script.min.js' ) : WE_Theme::THEME_VERSION,
+				self::DEBUG_THEME ? filemtime( get_stylesheet_directory() . '/dist/js/script.min.js' ) : self::THEME_VERSION,
 				true
 			);
 		}
@@ -61,14 +69,14 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 		 *
 		 * @return string The filtered title
 		 */
-		public function wet_filter_title( string $title, string $sep ) : string {
+		public function filter_title( string $title, string $sep ) : string {
 			global $page, $paged;
 
 			if ( \is_feed() ) {
 				return $title;
 			}
 
-			// Add the blog name
+			// Add the blog name.
 			$title .= \get_bloginfo( 'name', 'display' );
 
 			// Add the blog description for the home/front page.
@@ -77,31 +85,49 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 				$title .= " $sep $site_description";
 			}
 
-			// Add a page number if necessary:
+			// Add a page number if necessary.
 			if ( ( $paged >= 2 || $page >= 2 ) && ! is_404() ) {
-				$title .= " $sep " . sprintf( __( 'Page %s', '_s' ), max( $paged, $page ) );
+				$title .= " $sep " . sprintf( __( 'Page %s', 'wet' ), max( $paged, $page ) );
 			}
 			return $title;
 
 		}
 
-		public function wet_custom_excerpt_length() {
+		/**
+		 * Return the custom excerpt length for the theme.
+		 *
+		 * @return  int Number of characters in the excerpt length.
+		 */
+		public function excerpt_length() : int {
 			return 20;
 		}
-		
-		public function wet_except_more() {
-			return '<a href=' . \get_the_permalink() . '> ... Read More</a>';
+
+		/**
+		 * Handle the read more below the except.
+		 *
+		 * @return string The Read More string.
+		 */
+		public function except_more() : string {
+			return '<a href=' . \get_the_permalink() . '> ... ' . __( 'Read More', 'wet' ) . '</a>';
 		}
-		
-		public function load_navigation() {
+
+		/**
+		 * Register the Navigation Menus.
+		 *
+		 * This theme has 2 a main and a footer.
+		 */
+		public function register_navigation() {
 			\register_nav_menus(
 				array(
-					'sticky_bar' => __( 'Sticky Bar', 'wet' ),
-					'footer_bar' => __( 'Footer Bar', 'wet' )
+					'primary' => __( 'Primary Navigation Bar', 'wet' ),
+					'footer'  => __( 'Footer Navigation Bar', 'wet' )
 				)
 			);
 		}
 		
+		/**
+		 * Register the Widgets Sidebar.
+		 */
 		public function add_widgets() {
 			\register_sidebar( 
 				array( 
@@ -117,6 +143,7 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 
 	}
 
+	// Initialize the theme and the customizer.
 	new WE_Theme();
 	$we_customizer = new Includes\WE_Customizer();
 
