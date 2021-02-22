@@ -1,0 +1,44 @@
+*,
+*::before,
+*::after {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	color: var(--wet-base-color);
+	font-family: var(--wet-base-font-family);
+	font-size: var(--wet-base-font-size);
+	line-height: 1.4;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+	color: var(--wet-base-color);
+	outline-offset: 2px;
+	text-decoration: none;
+	font-weight: 700;
+}
+
+a:hover {
+	outline: 1px dashed var(--wet-base-color);
+	border-radius: 0;
+}
+
+a:active {
+	outline: 1px solid var(--wet-base-color);
+	border-radius: 0;
+}
+
+img {
+	max-width: 100%;
+	display: block;
+	object-fit: cover;
+}
+
+ul {
+	list-style: none;
+}

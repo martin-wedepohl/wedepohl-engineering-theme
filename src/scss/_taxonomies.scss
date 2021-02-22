@@ -1,0 +1,4 @@
+.cat-links a:not(:last-child)::after,
+.tag-links a:not(:last-child)::after {
+	content: ', ';
+}
