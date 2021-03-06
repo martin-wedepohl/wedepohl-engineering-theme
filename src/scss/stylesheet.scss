@@ -1,6 +1,7 @@
 @use 'variables';
 @use 'reset';
 @use 'taxonomies';
+@use 'menu';
 
 .screen-reader-text {
 	display: none;
@@ -41,42 +42,11 @@
 
 .site-header {
 	display: flex;
-	gap: 1em;
 	justify-content: space-between;
-	margin: 1em 0;
-}
-
-.menu-button-container {
-	text-align: right;
-}
-
-.primary-menu-container {
-	display: none;
-	justify-content: center;
-}
-
-#primary-menu-list {
-	display: flex;
-	flex-direction: column;
-}
-
-#primary-mobile-menu {
-	.open,
-	.close {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		font-size: 1.5rem;
-		padding: .25em .5em;
-	}
-
-	.close {
-		display: none;
-	}
-}
-
-.sub-menu {
-	display: none;
+	align-items: center;
+	gap: 1em;
+	padding: 1em;
+	background: var(--header-bg);
 }
 
 .site-footer {
@@ -102,21 +72,7 @@
 	.site-header {
 		align-items: center;
 		flex-direction: row;
-		margin: 1em;
-
-		.menu-button-container {
-			display: none;
-		}
-
-		.primary-menu-container {
-			display: flex;
-		}
-
-		#primary-menu-list {
-			display: flex;
-			flex-direction: row;
-			gap: 2em;
-		}
+		padding: 1em 2em;
 	}
 	
 	.site-main {

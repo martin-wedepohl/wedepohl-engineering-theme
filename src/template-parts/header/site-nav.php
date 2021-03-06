@@ -11,14 +11,10 @@
 
 <?php if ( has_nav_menu( 'primary' ) ) : ?>
 	<nav id="site-navigation" class="primary-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Primary menu', 'wet' ); ?>">
-		<div class="menu-button-container">
-			<button id="primary-mobile-menu" class="button" aria-controls="primary-menu-list" aria-expanded="false">
-				<span class="dropdown-icon open dashicons-before dashicons-menu" data-show="true"><?php esc_html_e( 'Menu', 'wet' ); ?>
-				</span>
-				<span class="dropdown-icon close dashicons-before dashicons-no" data-show="false"><?php esc_html_e( 'Close', 'wet' ); ?>
-				</span>
-			</button><!-- #primary-mobile-menu -->
-		</div><!-- .menu-button-container -->
+		<div class="hamburger-div">
+			<label for="input-hamburger" class="hamburger"></label>
+			<input type="checkbox" id="input-hamburger" hidden>
+		</div>
 		<?php
 		wp_nav_menu(
 			array(

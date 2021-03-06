@@ -1,31 +1,31 @@
-const menuOpen = document.querySelector( "#primary-mobile-menu .open" );
-const menuClose = document.querySelector( "#primary-mobile-menu .close" );
-const primaryMenuContainer = document.querySelector( ".primary-menu-container" );
+const hamburgerDiv = document.querySelector( ".hamburger-div" );
+const hamburger = document.querySelector( ".hamburger" );
+const inputHamburger = document.querySelector( "#input-hamburger" );
+const menuWrapper = document.querySelector( ".menu-wrapper" );
+const arrows = document.querySelectorAll( ".menu-item-has-children > a" );
 const homeMain = document.querySelector( ".home #main" );
 
-// Handle the primary menu
-if ( null !== menuOpen && null !== menuClose ) {
-	menuOpen.addEventListener( "click", e => {
-		const show = e.target.dataset.show;
-		if ( "true" === show ) {
-			e.target.dataset.show = "false";
-			e.target.style.display = "none";
-			menuClose.dataset.show = "true";
-			menuClose.style.display = "flex";
-			primaryMenuContainer.style.display = "flex";
-		}
+hamburgerDiv.addEventListener( "click", event => {
+	event.stopPropagation();
+	event.preventDefault();
+	hamburger.classList.toggle( "close" );
+	if ( hamburger.classList.contains( "close" ) ) {
+		inputHamburger.checked = true;
+		menuWrapper.classList.add( "show-menu" );
+	} else {
+		inputHamburger.checked = false;
+		menuWrapper.classList.remove( "show-menu" );
+	}
+});
+
+Array.from(arrows).forEach(arrow => {
+	arrow.addEventListener( "click", (event) => {
+		// event.stopPropagation();
+		// event.preventDefault();
+		console.log(event);
+		console.log(event.target);
 	});
-	menuClose.addEventListener( "click", e => {
-		const show = e.target.dataset.show;
-		if ( "true" === show ) {
-			e.target.dataset.show = "false";
-			e.target.style.display = "none";
-			menuOpen.dataset.show = "true";
-			menuOpen.style.display = "flex";
-			primaryMenuContainer.style.display = "none";
-		}
-	});
-}
+});
 
 // Handle the front page which has a cover image
 if ( null === homeMain ) {

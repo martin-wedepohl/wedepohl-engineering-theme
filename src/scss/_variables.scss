@@ -1,4 +1,6 @@
 :root {
+	box-sizing: border-box;
+
 	--wet-base-font-size: 16px;
 	--wet-base-font-family: Arial, Helvetica, sans-serif;
 	--wet-base-color: #444;
@@ -8,4 +10,11 @@
 	--wet-main-margin: 1em;
 	--wet-admin-bar-padding: 46px;
 	--wet-admin-bar-wide-padding: 32px;
+
+	--primary: #e70146;
+	--hover-color: #fdd052;
+	--dark: #1c2022;
+	--light: #fff;
+	
+	--header-bg: var(--primary);
 }
