@@ -1,39 +1,37 @@
-const hamburgerDiv = document.querySelector( ".hamburger-div" );
-const hamburger = document.querySelector( ".hamburger" );
-const inputHamburger = document.querySelector( "#input-hamburger" );
-const menuWrapper = document.querySelector( ".menu-wrapper" );
-const arrows = document.querySelectorAll( ".menu-item-has-children > a" );
 const homeMain = document.querySelector( ".home #main" );
 
-hamburgerDiv.addEventListener( "click", event => {
-	event.stopPropagation();
-	event.preventDefault();
-	hamburger.classList.toggle( "close" );
-	if ( hamburger.classList.contains( "close" ) ) {
-		inputHamburger.checked = true;
-		menuWrapper.classList.add( "show-menu" );
+function setBackGround() {
+	const width = window.innerWidth;
+	let url = '';
+	if (width <= 600) {
+		url = homeMain.dataset.url600;
+	} else if (width <= 768) {
+		url = homeMain.dataset.url768;
+	} else if (width <= 992) {
+		url = homeMain.dataset.url992;
+	} else if (width <= 1200) {
+		url = homeMain.dataset.url1200;
 	} else {
-		inputHamburger.checked = false;
-		menuWrapper.classList.remove( "show-menu" );
+		url = homeMain.dataset.url;
 	}
-});
-
-Array.from(arrows).forEach(arrow => {
-	arrow.addEventListener( "click", (event) => {
-		// event.stopPropagation();
-		// event.preventDefault();
-		console.log(event);
-		console.log(event.target);
-	});
-});
+	if ( "" !== url ) {
+		homeMain.style.backgroundImage = "url('" + url + "')";
+	}
+}
 
 // Handle the front page which has a cover image
 if ( null === homeMain ) {
 	// Not on the front page
-	const main = document.querySelector( '#main' );
-	main.removeAttribute('data-url');
+	const main = document.querySelector( "#main" );
+	main.removeAttribute( "data-url'" );
+	main.removeAttribute( "data-url1200" );
+	main.removeAttribute( "data-url992" );
+	main.removeAttribute( "data-url768" );
+	main.removeAttribute( "data-url600" );
 } else {
 	// On the front page
-	const url = homeMain.dataset.url;
-	homeMain.style.backgroundImage = "url('" + url + "')";
+	window.addEventListener( "resize", () => {
+		setBackGround();
+	});
+	setBackGround();
 }

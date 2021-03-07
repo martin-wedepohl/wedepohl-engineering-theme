@@ -1,20 +1,27 @@
 :root {
 	box-sizing: border-box;
 
+	// Base variables
 	--wet-base-font-size: 16px;
 	--wet-base-font-family: Arial, Helvetica, sans-serif;
-	--wet-base-color: #444;
-	--wet-footer-color: #eee;
-	--wet-footer-height: 50px;
 	--wet-max-width: 70ch;
-	--wet-main-margin: 1em;
+
+	// Colors
+	--wet-background-color: #f5f5f5;
+	--wet-base-color: #444;
+	--wet-border-color: #44444440;
+
+	// Header variables
+	--wet-header-color: var(--wet-background-color);
+	--wet-header-height-home: 4.5em;
+	--wet-header-height: 3.5em;
+
+	// Footer variables
+	--wet-footer-color: var(--wet-background-color);
+	--wet-footer-height: 50px;
+	
+//	--wet-main-margin: 1em;
+	// Admin Bar variables
 	--wet-admin-bar-padding: 46px;
 	--wet-admin-bar-wide-padding: 32px;
-
-	--primary: #e70146;
-	--hover-color: #fdd052;
-	--dark: #1c2022;
-	--light: #fff;
-	
-	--header-bg: var(--primary);
 }

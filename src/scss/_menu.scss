@@ -1,190 +1,214 @@
-.menu-wrapper {
-	top: 144px;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: white;
-	font-size: 1.5rem;
-	padding-left: 1em;
-	z-index: 1000;
+.nav-toggle {
+	display: none;
+}
 
-	/* Hide menu */
+.nav-toggle-label {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-left: 1em;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+	display: block;
+	background: var(--wet-base-color);
+	height: 3px;
+	width: 2em;
+	border-radius: 2px;
+	position: relative;
+	transition: transform 350ms ease-in-out, opacity 200ms linear;
+}
+
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+	content: '';
+	position: absolute;
+}
+
+.nav-toggle-label span::before {
+	bottom: 7px;
+}
+
+.nav-toggle-label span::after {
+	top: 7px;
+}
+
+.nav-toggle:checked ~ nav ~ .nav-toggle-label span {
+	transform: rotate(45deg);
+}
+
+.nav-toggle:checked ~ nav ~ .nav-toggle-label span::before {
+	opacity: 0;
+}
+
+.nav-toggle:checked ~ nav ~ .nav-toggle-label span::after {
+	transform: rotate(90deg) translateX(-7px);
+}
+
+nav {
+	position: absolute;
+	text-align: left;
+	top: 100%;
+	left: 0;
+	background: var(--wet-header-color);
+	width: 100%;
+	transform: scale(1, 0);
+	transform-origin: top;
+	transition: transform 400ms ease-in-out;
+}
+
+nav li {
+	margin-bottom: 1em;
+	margin-left: 1em;
+}
+
+nav a {
+	font-size: 1rem;
+	text-transform: uppercase;
+	opacity: 0;
+	transition: opacity 150ms ease-in-out;
+}
+
+.nav-toggle:checked ~ nav {
+	transform: scale(1, 1);
+}
+
+.nav-toggle:checked ~ nav a {
+	opacity: 1;
+	transition: opacity 250ms ease-in-out 250ms;
+}
+
+.menu-wrapper {
 	display: flex;
 	flex-direction: column;
-	gap: 1em;
-	position: absolute;
-	opacity: 0;
-	transform: scale(0);
-	transform-origin: top center;
-	transition:
-		.25s transform cubic-bezier(.36, .4, .42, 1.48),
-		100ms opacity ease-in-out;
+	grid-gap: 1em;
 }
 
-.menu-wrapper li a {
-	display: block;
+.menu-item-has-children .sub-menu,
+.sub-menu .sub-menu {
+	border-left: 5px solid var(--wet-border-color);
+	margin: 1em 2em;
 }
 
-.disableclick a:hover {
-	pointer-events: none;
-}
-
-/* Submenu */
-.menu-item-has-children {
-	position: relative;
-}
-
-.sub-menu {
-	display: none;
-	padding-left: 2em;
-}
-
-.menu-item-has-children:hover > .sub-menu,
-.sub-menu:hover > .sub-menu {
-	display: block;
-	border-left: 2px solid red;
-}
-
-/* Arrows */
-.menu-item-has-children > a::after {
-	content: '';
-	position: absolute;
-	width: 0.5em;
-	height: 0.5em;
-	margin-left: 0.25em;
-	display:inline-block;
-	vertical-align: middle;
-	border-left: 0.15em solid currentColor;
-	border-bottom: 0.15em solid currentColor;
-	transform: rotate(-45deg);
-	top: .4em;
-	transition: transform .25s ease-in-out;
-}
-
-.menu-item-has-children:hover > a::after {
-	transform: rotate(225deg);
-}
-
-.hamburger-div {
-	height: 2em;
-	z-index: 100;
-	cursor: pointer;
-}
-
-.hamburger {
-	top: 1em;
-	width: 2em;
-	height: .25em;
-	display: block;
-	background: #fff;
-	position: relative;
-	cursor: pointer;
-}
-
-.hamburger::before,
-.hamburger::after {
-	content: '';
-	position: absolute;
-	left: 0;
-	background: inherit;
-	width: inherit;
-	height: inherit;
-	transition: 0.25s transform ease-in-out;
-}
-
-.hamburger::before {
-	bottom: .75em;
-}
-
-.hamburger::after {
-	top: .75em;
-}
-
-.close {
-	transform: rotate(45deg);
-	transition: 0.25s transform ease-in-out;
-}
-
-.close::before,
-.close::after {
-	top: 0;
-}	
-
-.close::before {
-	display: none;
-}
-
-.close::after {
-	transform: rotate(-90deg);
-	transition: 0.25s transform ease-in-out;
-}
-
-.show-menu {
-	opacity: 1;
-	transform: scale(1);
-}
-
-@media (min-width: 768px) {
-	.hamburger-div {
+@media (min-width: 850px) {
+	.nav-toggle-label {
 		display: none;
+	}
+	
+	.site-branding {
+		grid-column: 2 / 3;
 	}
 
 	.menu-wrapper {
-		opacity: 1;
-		transform: scale(1);
 		flex-direction: row;
-		position: relative;
-		top: 0;
-		background: var(--header-bg);
-		gap: 0;
+		gap: 1em;
 	}
 
-	.menu-wrapper a {
-		color: var(--light);
-		padding: 1em;
+	nav {
+		all: unset;
+		grid-column: 3 / 4;
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+
+		ul {
+			justify-content: flex-end;
+		}
+	
+		li {
+			margin-bottom: 0;
+		}
+	
+		a {
+			opacity: 1;
+			position: relative;
+
+			&:hover {
+				outline: none;
+			}
+		
+			&:hover::before {
+				transform: scale(1, 1);
+			}
+		}
+	
+		a::before {
+			content: '';
+			display: block;
+			height: .2em;
+			background: var(--wet-base-color);
+			position: absolute;
+			top: -.3em;
+			left: 0;
+			right: 0;
+			transform: scale(0, 1);
+			transform-origin: center;
+			transition: transform ease-in-out 250ms;
+		}
+		
 	}
 
 	.sub-menu {
-		position: absolute;
-		left: -120%;
-		background-color: var(--dark);
-		white-space: nowrap;
-		padding: 1em 0;
-		top: 3em;
-		min-width: 13em;
+		display: none;
 	}
 
-	.menu-item-has-children:hover > .sub-menu,
-	.sub-menu:hover > .sub-menu {
-		border-left-color: transparent;
+	.menu-item-has-children {
+		position: relative;
+		padding: 0 1em;
+
+		&::after {
+			content: '';
+			position: absolute;
+			width: .5em;
+			height: .5em;
+			top: .25em;
+			right: 0;
+			border-bottom: 2px solid var(--wet-base-color);
+			border-right: 2px solid var(--wet-base-color);
+			transform: rotate(45deg);
+			transition: transform 750ms ease-in-out;
+		}
+	
+		&:hover::after {
+			transform: rotate(320deg);
+		}
 	}
 
-	.sub-menu > li > a {
-		top: 1em;
-		padding: 0.5em 1.5em;
-	}
-
+	.menu-item-has-children .sub-menu,
 	.sub-menu .sub-menu {
-		left: -100%;
-		top: 0;
+		margin: 0;
+		border-left: none;
 	}
 
-	.menu-item-has-children > a::after {
-		top: 1.3em;
+	.menu-item-has-children:hover > .sub-menu {
+		display: block;
+		position: absolute;
+		top: 100%;
+		right: 0;
+		background: var(--wet-header-color);
+		width: 16em;
+		white-space: nowrap;
+		text-align: center;
+		outline: 1px solid var(--wet-base-color);
+
+		li {
+			padding: 1em 0;
+			text-align: center;
+		}
 	}
 
-	.sub-menu .menu-item-has-children > a::after {
-		top: .8em;
+	.sub-menu > .menu-item-has-children:hover > .sub-menu {
+		left: -25%;
 	}
 
-	.menu-wrapper > li:hover > a,
-	.sub-menu > li:hover > a {
-		background-color: hsla(0, 0%, 100%, 0.05);
-		color: var(--hover-color);
+	.sub-menu > .menu-item-has-children::after {
+		top: 1.25em;
+		right: .5em;
 	}
-
-	.menu-wrapper > li:hover > a {
-		background-color: hsla(0, 0%, 0%, .95);
-	}
-
 }

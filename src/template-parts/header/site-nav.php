@@ -10,11 +10,8 @@
 ?>
 
 <?php if ( has_nav_menu( 'primary' ) ) : ?>
+	<input type="checkbox" id="nav-toggle" class="nav-toggle">
 	<nav id="site-navigation" class="primary-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Primary menu', 'wet' ); ?>">
-		<div class="hamburger-div">
-			<label for="input-hamburger" class="hamburger"></label>
-			<input type="checkbox" id="input-hamburger" hidden>
-		</div>
 		<?php
 		wp_nav_menu(
 			array(
@@ -27,4 +24,7 @@
 		);
 		?>
 	</nav><!-- #site-navigation -->
-<?php endif; ?>
+	<label for="nav-toggle" class="nav-toggle-label">
+		<span></span>
+	</label>
+	<?php endif; ?>

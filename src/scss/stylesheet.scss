@@ -1,5 +1,7 @@
 @use 'variables';
 @use 'reset';
+@use 'header';
+@use 'footer';
 @use 'taxonomies';
 @use 'menu';
 
@@ -7,27 +9,31 @@
 	display: none;
 }
 
-.home #main {
-	background-size: cover;
-	height: calc(100vh - var(--wet-footer-height) - 75px - 22px);
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-	flex-direction: column;
-	color: white;
-	font-weight: 700;
-}
-
-.home.admin-bar #main {
-	height: calc(100vh - var(--wet-footer-height) - var(--wet-admin-bar-padding) - 66px - 22px);
-}
-
 .site-main {
 	margin: 1em;
 }
 
-.home .site-main {
-	margin: 0;
+.home {
+	.site-content {
+		position: relative;
+		top: 0;
+	}
+
+	.site-main {
+		background-size: cover;
+		height: calc(100vh - var(--wet-footer-height) - var(--wet-header-height-home));
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		flex-direction: column;
+		margin: 0;
+		color: white;
+		font-weight: 700;
+	}
+
+	&.admin-bar .site-main {
+		height: calc(100vh - var(--wet-footer-height) - var(--wet-admin-bar-padding) - var(--wet-header-height-home));
+	}
 }
 
 .entry-header,
@@ -38,43 +44,7 @@
 	align-items: center;
 }
 
-// Header
-
-.site-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	gap: 1em;
-	padding: 1em;
-	background: var(--header-bg);
-}
-
-.site-footer {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	position: relative;
-	background-color: var(--wet-footer-color);
-	height: var(--wet-footer-height);
-	width: 100%;
-}
-
-.site-footer .copyright {
-	font-size: .7em;
-}
-
 @media (min-width: 768px) {
-	.home #main {
-		flex-direction: row;
-	}
-
-	.site-header {
-		align-items: center;
-		flex-direction: row;
-		padding: 1em 2em;
-	}
-	
 	.site-main {
 		max-width: 80%;
 		margin: 1em auto;
@@ -86,6 +56,7 @@
 	
 	.home {
 		.site-main {
+			flex-direction: row;
 			max-width: 100%;
 			margin: 0;
 		}
@@ -98,8 +69,20 @@
 }
 
 @media (min-width: 783px) {
-	.home.admin-bar #main {
-		height: calc(100vh - var(--wet-footer-height) - var(--wet-admin-bar-wide-padding) - 66px - 22px);
+	.home.admin-bar .site-main {
+		height: calc(100vh - var(--wet-footer-height) - var(--wet-admin-bar-wide-padding) - var(--wet-header-height-home));
+	}
+}
+
+@media (min-width: 850px) {
+	.site-content {
+		position: relative;
+		top: var(--wet-header-height);
+	}
+
+	.home .site-content {
+		position: relative;
+		top: var(--wet-header-height-home);
 	}
 }
 
