@@ -60,92 +60,41 @@ if ( ! class_exists( 'WE_Customizer' ) ) {
 				array(
 					'title'       => __( 'Theme Options', 'wet' ),
 					'description' => __( 'Wedepohl Engineering Theme Options.', 'wet' ),
-				)
-			);
+				)	
+			);	
 
-			// Add sections to the panel.
-			$wp_customize->add_section(
-				'button',
-				array(
-					'title'    => 'The Button',
-					'priority' => 20,
-					'panel'    => 'wet-panel',
-				)
-			);
-		  
-			$wp_customize->add_section(
-				'wet_colors',
-				array(
-					'title'    => 'Colors',
-					'priority' => 30,
-					'panel'    => 'wet-panel',
-				)
-			);
-
-			$wp_customize->add_section(
-				'wet_images',
-				array(
-					'title'    => 'Images',
-					'priority' => 40,
-					'panel'    => 'wet-panel',
-				)
-			);
-
-			// Add settings to the sections.
-			$wp_customize->add_setting(
-				'button_display',
-				array(
-					'default'   => true,
-					'transport' => 'refresh',
-				)
-			);
-
-			$wp_customize->add_setting(
-				'button_text',
-				array(
-					'default'   => 'Projects Button',
-					'transport' => 'postMessage',
-				)
-			);
-
+			// Add Buttons Customizer
+			$this->add_button_setting( $wp_customize, 1 );
+			$this->add_button_setting( $wp_customize, 2 );
+			$this->add_button_setting( $wp_customize, 3 );
+			$this->add_button_section( $wp_customize, 'wet-panel', 1 );
+			$this->add_button_section( $wp_customize, 'wet-panel', 2 );
+			$this->add_button_section( $wp_customize, 'wet-panel', 3 );
+			$pages       = get_pages();
+			$pages_array = array( '' => 'Select a Page' );
+			foreach( $pages as $page ) {
+				$pages_array[ $page->post_name ] = $page->post_title;
+			}
+			$this->add_button_control( $wp_customize, $pages_array, 1 );
+			$this->add_button_control( $wp_customize, $pages_array, 2 );
+			$this->add_button_control( $wp_customize, $pages_array, 3 );
+			
+			// Add Color Customizer
 			$wp_customize->add_setting(
 				'background_color',
 				array(
 					'default'   => '#43C6E4',
 					'transport' => 'refresh',
-				)
-			);
-
-			$wp_customize->add_setting(
-				'background_image',
+				)	
+			);	
+				
+			$wp_customize->add_section(
+				'wet-colors',
 				array(
-					'default'   => '',
-					'transport' => 'refresh',
-				)
-			);
-
-			// Add controls to the sections.			
-			$wp_customize->add_control(
-				'button_display',
-				array(
-					'label'    => 'Button Display',
-					'section'  => 'button',
-					'settings' => 'button_display',
-					'type'     => 'radio',
-					'choices'  => array(
-						'show' => 'Show Button',
-						'hide' => 'Hide Button',
-					),
-				)
-			);
-
-			$wp_customize->add_control(
-				'button_text',
-				array(
-					'label'   => 'Button Text',
-					'section' => 'button',
-					'type'    => 'text',
-				)
+					'title'    => 'Colors',
+					'priority' => 30,
+					'panel'    => 'wet-panel',
+				)		
 			);
 
 			$wp_customize->add_control(
@@ -154,39 +103,36 @@ if ( ! class_exists( 'WE_Customizer' ) ) {
 					'background_color',
 					array(
 						'label'    => 'Background Color',
-						'section'  => 'wet_colors',
+						'section'  => 'wet-colors',
 						'settings' => 'background_color',
 					)
 				)
 			);
 
-			// Add selective refresh.
-			$wp_customize->selective_refresh->add_partial(
-				'button_display',
+			// Add Image Customizer
+			$this->add_image_setting( $wp_customize, '' );
+			$this->add_image_setting( $wp_customize, '1200' );
+			$this->add_image_setting( $wp_customize, '992' );
+			$this->add_image_setting( $wp_customize, '768' );
+			$this->add_image_setting( $wp_customize, '600' );
+			$wp_customize->add_section(
+				'wet-images',
 				array(
-					'selector' => '#button-container',
-					'render_callback' => 'show_main_button',
-				)
+					'title'    => 'Images',
+					'priority' => 40,
+					'panel'    => 'wet-panel',
+				)		
 			);
-
-			// Add Controls
-			$wp_customize->add_control(
-				new \WP_Customize_Image_Control(
-					$wp_customize,
-					'background_image',
-					array(
-						'label'    => __('Background Image', 'wet'),
-						'section'  => 'wet_images',
-						'settings' => 'background_image',    
-					)
-				)
-			);
-
+			$this->add_image_control( $wp_customize, 'wet-images', '',     __( 'Background Image (1920 pixel width', 'wet' ) );
+			$this->add_image_control( $wp_customize, 'wet-images', '1200', __( 'Background Image (1200 pixel width', 'wet' ) );
+			$this->add_image_control( $wp_customize, 'wet-images', '992',  __( 'Background Image (992 pixel width', 'wet' ) );
+			$this->add_image_control( $wp_customize, 'wet-images', '768',  __( 'Background Image (768 pixel width', 'wet' ) );
+			$this->add_image_control( $wp_customize, 'wet-images', '600',  __( 'Background Image (600 pixel width', 'wet' ) );
 
 			// Selective refresh for blog name and blog description.
 			$wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
 			$wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
-			
+
 		}
 
 		/**
@@ -200,12 +146,185 @@ if ( ! class_exists( 'WE_Customizer' ) ) {
 			<?php
 		}
 
+		public function add_button_section( $wp_customize, $panel, $button ) {
+
+			$wp_customize->add_section(
+				"wet-button{$button}",
+				array(
+					'title'    => "Front Page Button {$button}",
+					'priority' => $button,
+					'panel'    => $panel,
+				)
+			);
+
+		}
+
+		public function add_button_setting( $wp_customize, $button ) {
+
+			$wp_customize->add_setting(
+				"button_display_{$button}",
+				array(
+					'default'   => true,
+					'transport' => 'refresh',
+				)
+			);
+
+			$wp_customize->add_setting(
+				"button_text_{$button}",
+				array(
+					'default'   => 'Resume',
+					'transport' => 'refresh',
+				)
+			);
+
+			$wp_customize->add_setting(
+				"button_page_{$button}",
+				array(
+					'default'   => 'resume',
+					'transport' => 'refresh',
+				)
+			);
+
+			$wp_customize->add_setting(
+				"button_fore_{$button}",
+				array(
+					'default'   => '#fff',
+					'transport' => 'refresh',
+				)
+			);
+
+			$wp_customize->add_setting(
+				"button_back_{$button}",
+				array(
+					'default'   => '#f00',
+					'transport' => 'refresh',
+				)
+			);
+
+		}
+
+		public function add_button_control( $wp_customize, $pages, $button ) {
+
+			$wp_customize->add_control(
+				"button_display_{$button}",
+				array(
+					'label'    => "Display Button {$button}",
+					'section'  => "wet-button{$button}",
+					'settings' => "button_display_{$button}",
+					'type'     => 'radio',
+					'choices'  => array(
+						'show' => 'Show Button',
+						'hide' => 'Hide Button',
+					),
+				)
+			);
+
+			$wp_customize->add_control(
+				"button_text_{$button}",
+				array(
+					'label'   => "Button {$button} Text",
+					'section' => "wet-button{$button}",
+					'type'    => 'text',
+				)
+			);
+
+			$wp_customize->add_control(
+				new \WP_Customize_Control(
+					$wp_customize,
+					"button_page_{$button}",
+					array(
+						'label' => "Button {$button} Page",
+						'section' => "wet-button{$button}",
+						'type'    => 'select',
+						'choices' => $pages,
+					)
+				)
+			);
+
+			$wp_customize->add_control(
+				new \WP_Customize_Color_Control(
+					$wp_customize,
+					"button_back_{$button}",
+					array(
+						'label'    => 'Background Color',
+						'section'  => "wet-button{$button}",
+						'settings' => "button_back_{$button}",
+					)
+				)
+			);
+
+			$wp_customize->add_control(
+				new \WP_Customize_Color_Control(
+					$wp_customize,
+					"button_fore_{$button}",
+					array(
+						'label'    => 'Foreground Color',
+						'section'  => "wet-button{$button}",
+						'settings' => "button_fore_{$button}",
+					)
+				)
+			);
+
+		}
+
+		public function add_image_setting( $wp_customize, $image ) {
+
+			$wp_customize->add_setting(
+				"background_image{$image}",
+				array(
+					'default'   => '',
+					'transport' => 'refresh',
+				)
+			);
+
+		}
+
+		public function add_image_control( $wp_customize, $section, $image, $label ) {
+
+			$wp_customize->add_control(
+				new \WP_Customize_Image_Control(
+					$wp_customize,
+					"background_image{$image}",
+					array(
+						'label'    => $label,
+						'section'  => $section,
+						'settings' => "background_image{$image}",
+					)
+				)
+			);
+
+		}
+
 		/**
 		 * Callback function for the selective refresh.
 		 */
-		public function show_main_button() {
-			if( 'show' === get_theme_mod( 'button_display', 'show' ) ) {
-				echo "<a id='projects-button' href='/projects' class='button'>" . get_theme_mod( 'button_text', 'Projects Button' ) . "</a>";
+		public function show_main_buttons() {
+			if ( 'show' === get_theme_mod( 'button_display_1', 'show' ) ) {
+				echo "<a id='button-1' href='/" .
+					get_theme_mod( 'button_page_1', 'resume' ) .
+					"' class='buttons front-page-button' " .
+					"style='background-color:" . get_theme_mod( 'button_back_1', '#f00' ) . ";" .
+					"color:" . get_theme_mod( 'button_fore_1', '#fff' ) . ";'>" .
+					get_theme_mod( 'button_text_1', 'Resume' ) .
+					"</a>";
+			}
+			if ( 'show' === get_theme_mod( 'button_display_2', 'show' ) ) {
+				echo "<a id='button-2' href='/" .
+					get_theme_mod( 'button_page_2', 'contact-us' ) .
+					"' class='buttons front-page-button' " .
+					"style='background-color:" . get_theme_mod( 'button_back_2', '#f00' ) . ";" .
+					"color:" . get_theme_mod( 'button_fore_2', '#fff' ) . ";'>" .
+					get_theme_mod( 'button_text_2', 'Contact Us' ) .
+					"</a>";
+			}
+			if ( 'show' === get_theme_mod( 'button_display_3', 'show' ) ) {
+				echo "<a id='button-3' href='/" .
+					get_theme_mod( 'button_page_3', 'projects' ) .
+					"' class='buttons front-page-button' " .
+					"style='background-color:" . get_theme_mod( 'button_back_3', '#f00' ) . ";" .
+					"color:" . get_theme_mod( 'button_fore_3', '#fff' ) . ";'>" .
+					get_theme_mod( 'button_text_3', 'Projects' ) .
+					"</a>";
 			}
 		}
 	}

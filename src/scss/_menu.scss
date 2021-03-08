@@ -58,6 +58,7 @@ nav {
 	left: 0;
 	background: var(--wet-header-color);
 	width: 100%;
+	opacity: 0;
 	transform: scale(1, 0);
 	transform-origin: top;
 	transition: transform 400ms ease-in-out;
@@ -76,6 +77,7 @@ nav a {
 }
 
 .nav-toggle:checked ~ nav {
+	opacity: 1;
 	transform: scale(1, 1);
 }
 
@@ -87,7 +89,13 @@ nav a {
 .menu-wrapper {
 	display: flex;
 	flex-direction: column;
-	grid-gap: 1em;
+	gap: 1em;
+}
+
+.site-footer {
+	.menu-wrapper {
+		flex-direction: row;
+	}
 }
 
 .menu-item-has-children .sub-menu,

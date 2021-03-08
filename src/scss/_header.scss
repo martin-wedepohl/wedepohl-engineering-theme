@@ -58,6 +58,6 @@ header {
 		top: 0;
 		height: 3.5em;
 		justify-content: center;
-		grid-template-columns: 1fr auto minmax(600px, 4fr) 1fr;
+		grid-template-columns: 1em auto minmax(500px, 4fr) 1em;
 	}
 }

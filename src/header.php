@@ -23,22 +23,22 @@
 				$background_url = $default_url;
 			}
 			$default_url        = '/wp-content/themes/wedepohl-engineering/dist/img/digital-ball-1200.jpg';
-			$background_url1200 = get_theme_mod( 'background_image', $default_url );
+			$background_url1200 = get_theme_mod( 'background_image1200', $default_url );
 			if ( '' === $background_url1200 ) {
 				$background_url1200 = $default_url;
 			}
 			$default_url       = '/wp-content/themes/wedepohl-engineering/dist/img/digital-ball-992.jpg';
-			$background_url992 = get_theme_mod( 'background_image', $default_url );
+			$background_url992 = get_theme_mod( 'background_image992', $default_url );
 			if ( '' === $background_url992 ) {
 				$background_url992 = $default_url;
 			}
 			$default_url       = '/wp-content/themes/wedepohl-engineering/dist/img/digital-ball-768.jpg';
-			$background_url768 = get_theme_mod( 'background_image', $default_url );
+			$background_url768 = get_theme_mod( 'background_image768', $default_url );
 			if ( '' === $background_url768 ) {
 				$background_url768 = $default_url;
 			}
 			$default_url       = '/wp-content/themes/wedepohl-engineering/dist/img/digital-ball-600.jpg';
-			$background_url600 = get_theme_mod( 'background_image', $default_url );
+			$background_url600 = get_theme_mod( 'background_image600', $default_url );
 			if ( '' === $background_url600 ) {
 				$background_url600 = $default_url;
 			}

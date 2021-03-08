@@ -124,7 +124,7 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 				)
 			);
 		}
-		
+			
 		/**
 		 * Register the Widgets Sidebar.
 		 */
@@ -140,11 +140,10 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 				)
 			);
 		}
-
 	}
 
 	// Initialize the theme and the customizer.
 	new WE_Theme();
-	$we_customizer = new Includes\WE_Customizer();
+	$we_customizer = new includes\WE_Customizer();
 
 }

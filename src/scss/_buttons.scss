@@ -1,0 +1,38 @@
+a.buttons {
+	&:hover,
+	&:focus {
+		outline: none;
+	}
+}
+
+.front-page-button {
+	padding: 1em 3em;
+	box-shadow: 30px 45px 5px 0 rgb(0 0 0 / 35%);
+	background: black;
+	transform: perspective(1px);
+	border-radius: 10px;
+	transition: filter .25s ease-in-out;
+	&:hover,
+	&:focus {
+		filter: brightness(75%);
+		border-radius: 10px;
+	}
+}
+
+@media (min-width: 768px) {
+	.front-page-button {
+		&:hover,
+		&:focus {
+			animation: wobble-skew 1s ease-in-out 1;
+		}
+	}
+}
+
+@keyframes wobble-skew {
+	16.65% { transform: skew(-12deg); }
+	33.3%  { transform: skew(10deg); }
+	49.95% { transform: skew(-6deg); }
+	66.6%  { transform: skew(4deg); }
+	83.25% { transform: skew(-2deg); }
+	100%   { transform: skew(0); }
+}
