@@ -84,7 +84,7 @@ if ( ! class_exists( 'WE_Customizer' ) ) {
 				'background_color',
 				array(
 					'default'   => '#43C6E4',
-					'transport' => 'refresh',
+					'transport' => 'postMessage',
 				)	
 			);	
 				
@@ -121,7 +121,7 @@ if ( ! class_exists( 'WE_Customizer' ) ) {
 					'title'    => 'Images',
 					'priority' => 40,
 					'panel'    => 'wet-panel',
-				)		
+				)
 			);
 			$this->add_image_control( $wp_customize, 'wet-images', '',     __( 'Background Image (1920 pixel width', 'wet' ) );
 			$this->add_image_control( $wp_customize, 'wet-images', '1200', __( 'Background Image (1200 pixel width', 'wet' ) );
@@ -130,9 +130,8 @@ if ( ! class_exists( 'WE_Customizer' ) ) {
 			$this->add_image_control( $wp_customize, 'wet-images', '600',  __( 'Background Image (600 pixel width', 'wet' ) );
 
 			// Selective refresh for blog name and blog description.
-			$wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
+			$wp_customize->get_setting( 'blogname' )->transport        = 'postMessage';
 			$wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
-
 		}
 
 		/**
@@ -141,7 +140,7 @@ if ( ! class_exists( 'WE_Customizer' ) ) {
 		public function customizer_css() {
 			?>
 <style type="text/css">
-	body { background: #<?php echo get_theme_mod('background_color', '#43C6E4'); ?>; }
+	body { background: #<?php echo esc_attr( get_theme_mod( 'background_color', '#43C6E4' ) ); ?>; }
 </style>
 			<?php
 		}
@@ -233,7 +232,7 @@ if ( ! class_exists( 'WE_Customizer' ) ) {
 					$wp_customize,
 					"button_page_{$button}",
 					array(
-						'label' => "Button {$button} Page",
+						'label'   => "Button {$button} Page",
 						'section' => "wet-button{$button}",
 						'type'    => 'select',
 						'choices' => $pages,
@@ -295,37 +294,25 @@ if ( ! class_exists( 'WE_Customizer' ) ) {
 
 		}
 
+		public function build_button( $num, $page, $background, $color, $text ) {
+			if ( 'show' === get_theme_mod( "button_display_{$num}", 'show' ) ) {
+				$id  = esc_attr( "button-$num" );
+				$url = esc_url( get_site_url() . '/' . get_theme_mod( "button_page_{$num}", $page ) );
+				$bg  = esc_attr( get_theme_mod( "button_back_{$num}", $background ) );
+				$clr = esc_attr( get_theme_mod( "button_fore_{$num}", $color ) );
+				$txt = esc_attr( get_theme_mod( "button_text_{$num}", $txt ) );
+				return "<a id='{$id}' href='{$url}' class='buttons front-page-button' style='background-color:{$bg}; color:{$clr};'>${txt}</a>";
+			}
+			return '';
+		}
+
 		/**
 		 * Callback function for the selective refresh.
 		 */
 		public function show_main_buttons() {
-			if ( 'show' === get_theme_mod( 'button_display_1', 'show' ) ) {
-				echo "<a id='button-1' href='/" .
-					get_theme_mod( 'button_page_1', 'resume' ) .
-					"' class='buttons front-page-button' " .
-					"style='background-color:" . get_theme_mod( 'button_back_1', '#f00' ) . ";" .
-					"color:" . get_theme_mod( 'button_fore_1', '#fff' ) . ";'>" .
-					get_theme_mod( 'button_text_1', 'Resume' ) .
-					"</a>";
-			}
-			if ( 'show' === get_theme_mod( 'button_display_2', 'show' ) ) {
-				echo "<a id='button-2' href='/" .
-					get_theme_mod( 'button_page_2', 'contact-us' ) .
-					"' class='buttons front-page-button' " .
-					"style='background-color:" . get_theme_mod( 'button_back_2', '#f00' ) . ";" .
-					"color:" . get_theme_mod( 'button_fore_2', '#fff' ) . ";'>" .
-					get_theme_mod( 'button_text_2', 'Contact Us' ) .
-					"</a>";
-			}
-			if ( 'show' === get_theme_mod( 'button_display_3', 'show' ) ) {
-				echo "<a id='button-3' href='/" .
-					get_theme_mod( 'button_page_3', 'projects' ) .
-					"' class='buttons front-page-button' " .
-					"style='background-color:" . get_theme_mod( 'button_back_3', '#f00' ) . ";" .
-					"color:" . get_theme_mod( 'button_fore_3', '#fff' ) . ";'>" .
-					get_theme_mod( 'button_text_3', 'Projects' ) .
-					"</a>";
-			}
+			echo $this->build_button( 1, 'resume', '#f00', '#fff', 'Resume' );
+			echo $this->build_button( 2, 'contact-us', '#f00', '#fff', 'Contact Us' );
+			echo $this->build_button( 3, 'projects', '#f00', '#fff', 'Projects' );
 		}
 	}
 }

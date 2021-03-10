@@ -1,6 +1,5 @@
 const siteTitle = document.querySelector( '.site-title' );
 const siteDescription = document.querySelector( '.site-description' );
-const projectsButton = document.getElementById( 'projects-button' );
 
 const addCustomizer = () => {
 
@@ -32,17 +31,6 @@ const addCustomizer = () => {
 			value.bind(
 				newval => {
 					siteDescription.innerHTML = newval;
-				}
-			);
-		}
-	);
-
-	wp.customize(
-		'button_text',
-		value => {
-			value.bind(
-				newval => {
-					projectsButton.innerHTML = newval;
 				}
 			);
 		}

@@ -19,7 +19,7 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 	class WE_Theme {
 
 		const DEBUG_THEME   = true;
-		const THEME_VERSION = '0.1.1';
+		const THEME_VERSION = '0.1.2';
 
 		/**
 		 * Class constructor.
@@ -41,13 +41,24 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 		 * so they will be always reloaded. Otherwise use the version of the theme.
 		 */
 		public function enqueue() {
-			\wp_enqueue_style(
-				'wedeng-style',
-				get_template_directory_uri() . '/dist/css/stylesheet.min.css',
-				array(),
-				self::DEBUG_THEME ? filemtime( get_stylesheet_directory() . '/dist/css/stylesheet.min.css' ) : self::THEME_VERSION,
-				'all'
-			);
+			if ( \is_page( 'resume' ) ) {
+				\wp_enqueue_style(
+					'wedeng-style',
+					get_template_directory_uri() . '/dist/css/resume.min.css',
+					array(),
+					self::DEBUG_THEME ? filemtime( get_stylesheet_directory() . '/dist/css/resume.min.css' ) : self::THEME_VERSION,
+					'all'
+				);
+
+			} else if ( \is_front_page() ) {
+				\wp_enqueue_style(
+					'wedeng-style',
+					get_template_directory_uri() . '/dist/css/stylesheet.min.css',
+					array(),
+					self::DEBUG_THEME ? filemtime( get_stylesheet_directory() . '/dist/css/stylesheet.min.css' ) : self::THEME_VERSION,
+					'all'
+				);
+			}
 
 			\wp_enqueue_script(
 				'wedeng-script',
@@ -57,7 +68,7 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 				true
 			);
 		}
-		
+
 		/**
 		 * Filter the title
 		 *
@@ -124,7 +135,7 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 				)
 			);
 		}
-			
+
 		/**
 		 * Register the Widgets Sidebar.
 		 */

@@ -1,0 +1,48 @@
+@use 'variables';
+@use 'reset';
+@use 'header';
+@use 'footer';
+@use 'menu';
+
+.screen-reader-text {
+	display: none;
+}
+
+.site-main {
+	margin: 1em;
+}
+
+@media (min-width: 768px) {
+	.site-main {
+		max-width: 80%;
+		margin: 1em auto;
+	}
+	
+	.site-content {
+		margin-bottom: var(--wet-footer-height);
+	}
+}
+
+@media (min-width: 850px) {
+	.site-content {
+		position: relative;
+		top: var(--wet-header-height);
+	}
+
+	.education-title,
+	.skills-title,
+	.work-experience-title,
+	.activities-title {
+		padding-top: var(--wet-header-height);
+	}
+
+	.admin-bar {
+		.education-title,
+		.skills-title,
+		.work-experience-title,
+		.activities-title {
+			padding-top: calc(var(--wet-header-height) + var(--wet-admin-bar-wide-padding));
+		}
+	}
+
+}
