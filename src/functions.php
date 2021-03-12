@@ -32,6 +32,7 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 			\add_filter( 'excerpt_more', array( $this, 'except_more' ) );
 			\add_action( 'after_setup_theme', array( $this, 'register_navigation' ) );
 			\add_action( 'widgets_init', array( $this, 'add_widgets' ) );
+			\add_action( 'wp_head', array( $this, 'add_favicon' ) );
 		}
 
 		/**
@@ -41,7 +42,7 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 		 * so they will be always reloaded. Otherwise use the version of the theme.
 		 */
 		public function enqueue() {
-			if ( \is_page( 'resume' ) ) {
+			if ( \is_page( 'resume' ) || \is_page( 'additional-seminars' ) ) {
 				\wp_enqueue_style(
 					'wedeng-style',
 					get_template_directory_uri() . '/dist/css/resume.min.css',
@@ -150,6 +151,13 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 					'after_title' => '</h3>'
 				)
 			);
+		}
+
+		/**
+		 * Add the Favicon
+		 */
+		public function add_favicon() {
+			echo '<link rel="shortcut icon" type="image/x-icon" href="' . get_template_directory_uri() . '/dist/img/favicon.ico" />';
 		}
 	}
 

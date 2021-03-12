@@ -14,7 +14,7 @@
 
 @media (min-width: 768px) {
 	.site-main {
-		max-width: 80%;
+		max-width: var(--wet-max-width);
 		margin: 1em auto;
 	}
 	

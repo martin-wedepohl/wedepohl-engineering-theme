@@ -297,7 +297,7 @@ if ( ! class_exists( 'WE_Customizer' ) ) {
 		public function build_button( $num, $page, $background, $color, $text ) {
 			if ( 'show' === get_theme_mod( "button_display_{$num}", 'show' ) ) {
 				$id  = esc_attr( "button-$num" );
-				$url = esc_url( get_site_url() . '/' . get_theme_mod( "button_page_{$num}", $page ) );
+				$url = esc_url( get_site_url() . '/' . get_theme_mod( "button_page_{$num}", $page ) . '/' );
 				$bg  = esc_attr( get_theme_mod( "button_back_{$num}", $background ) );
 				$clr = esc_attr( get_theme_mod( "button_fore_{$num}", $color ) );
 				$txt = esc_attr( get_theme_mod( "button_text_{$num}", $txt ) );

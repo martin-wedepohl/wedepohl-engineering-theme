@@ -17,19 +17,19 @@ a:link,
 a:visited,
 a:hover,
 a:active {
-	color: var(--wet-base-color);
+	color: var(--wet-link-color);
 	outline-offset: 2px;
 	text-decoration: none;
 	font-weight: 700;
 }
 
 a:hover {
-	outline: 1px dashed var(--wet-base-color);
+	outline: 1px dashed var(--wet-link-color);
 	border-radius: 0;
 }
 
 a:active {
-	outline: 1px solid var(--wet-base-color);
+	outline: 1px solid var(--wet-link-color);
 	border-radius: 0;
 }
 

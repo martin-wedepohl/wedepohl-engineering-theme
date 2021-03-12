@@ -150,7 +150,7 @@ nav a {
 			content: '';
 			display: block;
 			height: .2em;
-			background: var(--wet-base-color);
+			background: var(--wet-link-color);
 			position: absolute;
 			top: -.3em;
 			left: 0;
@@ -177,8 +177,8 @@ nav a {
 			height: .5em;
 			top: .25em;
 			right: 0;
-			border-bottom: 2px solid var(--wet-base-color);
-			border-right: 2px solid var(--wet-base-color);
+			border-bottom: 2px solid var(--wet-link-color);
+			border-right: 2px solid var(--wet-link-color);
 			transform: rotate(45deg);
 			transition: transform 750ms ease-in-out;
 		}
@@ -203,7 +203,7 @@ nav a {
 		width: 16em;
 		white-space: nowrap;
 		text-align: center;
-		outline: 1px solid var(--wet-base-color);
+		outline: 1px solid var(--wet-link-color);
 
 		li {
 			padding: 1em 0;
