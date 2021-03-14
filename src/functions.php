@@ -19,7 +19,7 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 	class WE_Theme {
 
 		const DEBUG_THEME   = true;
-		const THEME_VERSION = '0.1.2';
+		const THEME_VERSION = '0.1.3';
 
 		/**
 		 * Class constructor.
@@ -52,6 +52,14 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 				);
 
 			} else if ( \is_front_page() ) {
+				\wp_enqueue_style(
+					'wedeng-style',
+					get_template_directory_uri() . '/dist/css/home.min.css',
+					array(),
+					self::DEBUG_THEME ? filemtime( get_stylesheet_directory() . '/dist/css/home.min.css' ) : self::THEME_VERSION,
+					'all'
+				);
+			} else {
 				\wp_enqueue_style(
 					'wedeng-style',
 					get_template_directory_uri() . '/dist/css/stylesheet.min.css',

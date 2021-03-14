@@ -12,17 +12,6 @@
 	margin: 1em;
 }
 
-@media (min-width: 768px) {
-	.site-main {
-		max-width: var(--wet-max-width);
-		margin: 1em auto;
-	}
-	
-	.site-content {
-		margin-bottom: var(--wet-footer-height);
-	}
-}
-
 @media (min-width: 850px) {
 	.site-content {
 		position: relative;
@@ -46,3 +35,15 @@
 	}
 
 }
+
+@media (min-width: 1030px) {
+	.site-main {
+		max-width: var(--wet-max-width);
+		margin: 1em auto;
+	}
+	
+	.site-content {
+		margin-bottom: var(--wet-footer-height);
+	}
+}
+

@@ -23,7 +23,7 @@ function setBackGround() {
 if ( null === homeMain ) {
 	// Not on the front page
 	const main = document.querySelector( "#main" );
-	main.removeAttribute( "data-url'" );
+	main.removeAttribute( "data-url" );
 	main.removeAttribute( "data-url1200" );
 	main.removeAttribute( "data-url992" );
 	main.removeAttribute( "data-url768" );
