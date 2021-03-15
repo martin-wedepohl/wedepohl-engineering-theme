@@ -19,7 +19,7 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 	class WE_Theme {
 
 		const DEBUG_THEME   = true;
-		const THEME_VERSION = '0.1.4';
+		const THEME_VERSION = '0.1.5';
 
 		/**
 		 * Class constructor.

@@ -14,6 +14,7 @@
 		);
 		?>
 		<span class="copyright">&copy; 1995-<?php echo esc_html( gmdate( 'Y' ) ); ?> Wedepohl Engineering</span>
+		<span class="to-top">></span>
 	</footer>
 </div><!-- #page -->
 <?php wp_footer(); ?>
