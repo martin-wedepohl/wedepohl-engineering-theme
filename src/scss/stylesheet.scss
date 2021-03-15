@@ -9,7 +9,22 @@
 	display: none;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 1em auto;
+}
+
+p {
+	line-height: 1.5;
+}
+
 .site-content {
+	margin: 1em auto;
+	max-width: var(--wet-max-width);
 	position: relative;
 	top: 0;
 }
@@ -24,6 +39,12 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+.privacy-date {
+	margin-top: 1.5em;
+    font-size: .8em;
+    font-weight: bold;
 }
 
 @media (min-width: 850px) {
