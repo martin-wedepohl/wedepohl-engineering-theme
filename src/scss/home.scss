@@ -16,12 +16,12 @@
 }
 
 .home {
-	.site-content {
+	& .site-content {
 		position: relative;
 		top: 0;
 	}
 
-	.site-main {
+	& .site-main {
 		background-size: cover;
 		height: calc(100vh - var(--wet-footer-height) - var(--wet-header-height-home));
 		display: flex;
@@ -57,13 +57,13 @@
 	}
 	
 	.home {
-		.site-main {
+		& .site-main {
 			flex-direction: row;
 			max-width: 100%;
 			margin: 0;
 		}
 		
-		.site-content {
+		& .site-content {
 			margin-bottom: 0;
 		}
 	}
