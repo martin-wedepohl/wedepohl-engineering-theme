@@ -19,7 +19,7 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 	class WE_Theme {
 
 		const DEBUG_THEME   = true;
-		const THEME_VERSION = '0.1.5';
+		const THEME_VERSION = '0.1.6';
 
 		/**
 		 * Class constructor.
@@ -33,7 +33,7 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 			\add_action( 'after_setup_theme', array( $this, 'register_navigation' ) );
 			\add_action( 'widgets_init', array( $this, 'add_widgets' ) );
 			\add_action( 'wp_head', array( $this, 'add_favicon' ) );
-		  }
+		}
 
 		/**
 		 * Enqueue styles and scripts.
@@ -45,13 +45,13 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 			$css = '';
 			if ( \is_page( 'resume' ) || \is_page( 'additional-seminars' ) ) {
 				$css  = get_template_directory_uri() . '/dist/css/resume.min.css';
-				$file = get_stylesheet_directory()   . '/dist/css/resume.min.css';
+				$file = get_stylesheet_directory() . '/dist/css/resume.min.css';
 			} elseif ( \is_front_page() ) {
 				$css  = get_template_directory_uri() . '/dist/css/home.min.css';
-				$file = get_stylesheet_directory()   . '/dist/css/home.min.css';
+				$file = get_stylesheet_directory() . '/dist/css/home.min.css';
 			} else {
 				$css  = get_template_directory_uri() . '/dist/css/stylesheet.min.css';
-				$file = get_stylesheet_directory()   . '/dist/css/stylesheet.min.css';
+				$file = get_stylesheet_directory() . '/dist/css/stylesheet.min.css';
 			}
 
 			if ( '' !== $css ) {
@@ -163,7 +163,7 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 		public function add_favicon() {
 			echo '<link rel="shortcut icon" type="image/x-icon" href="' . get_template_directory_uri() . '/dist/img/favicon.ico" />';
 		}
-	  }
+	}
 
 	// Initialize the theme and the customizer.
 	new WE_Theme();

@@ -1,5 +1,6 @@
 @use 'variables';
 @use 'reset';
+@use 'mixins' as *;
 @use 'header';
 @use 'footer';
 @use 'taxonomies';
@@ -45,7 +46,7 @@
 	align-items: center;
 }
 
-@media (min-width: 768px) {
+@include mq(small) {
 	.site-main {
 		max-width: 80%;
 		margin: 1em auto;
@@ -69,13 +70,13 @@
 	
 }
 
-@media (min-width: 783px) {
+@include mq(admin-bar) {
 	.home.admin-bar .site-main {
 		height: calc(100vh - var(--wet-footer-height) - var(--wet-admin-bar-wide-padding) - var(--wet-header-height-home));
 	}
 }
 
-@media (min-width: 850px) {
+@include mq(medium) {
 	.site-content {
 		position: relative;
 		top: var(--wet-header-height);
@@ -87,7 +88,7 @@
 	}
 }
 
-@media (min-width: 1000px) {
+@include mq(large) {
 	.home .site-main {
 		max-width: 100%;
 	}	

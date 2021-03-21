@@ -1,5 +1,6 @@
 @use 'variables';
 @use 'reset';
+@use 'mixins' as *;
 @use 'header';
 @use 'footer';
 @use 'taxonomies';
@@ -47,7 +48,7 @@ p {
     font-weight: bold;
 }
 
-@media (min-width: 850px) {
+@include mq(medium) {
 	.site-main {
 		min-height: calc(100vh - var(--wet-footer-height) - var(--wet-header-height));
 	}

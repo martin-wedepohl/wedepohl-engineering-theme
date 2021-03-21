@@ -1,5 +1,6 @@
 @use 'variables';
 @use 'reset';
+@use 'mixins' as *;
 @use 'header';
 @use 'footer';
 @use 'menu';
@@ -12,7 +13,7 @@
 	margin: 1em;
 }
 
-@media (min-width: 850px) {
+@include mq(medium) {
 	.site-content {
 		position: relative;
 		top: var(--wet-header-height);
@@ -36,7 +37,7 @@
 
 }
 
-@media (min-width: 1030px) {
+@include mq(large-resume) {
 	.site-main {
 		max-width: var(--wet-max-width);
 		margin: 1em auto;
