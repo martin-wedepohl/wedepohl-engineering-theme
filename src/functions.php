@@ -19,7 +19,7 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 	class WE_Theme {
 
 		const DEBUG_THEME   = true;
-		const THEME_VERSION = '0.1.7';
+		const THEME_VERSION = '0.1.8';
 
 		/**
 		 * Class constructor.
@@ -27,12 +27,13 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 		public function __construct() {
 			\add_theme_support( 'post-thumbnails' );
 			\add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ) );
-			\add_filter( 'wp_title', array( $this, 'filter_title' ), 10, 2 );
-			\add_filter( 'excerpt_length', array( $this, 'excerpt_length' ) );
-			\add_filter( 'excerpt_more', array( $this, 'except_more' ) );
 			\add_action( 'after_setup_theme', array( $this, 'register_navigation' ) );
 			\add_action( 'widgets_init', array( $this, 'add_widgets' ) );
 			\add_action( 'wp_head', array( $this, 'add_favicon' ) );
+			\add_filter( 'wp_title', array( $this, 'filter_title' ), 10, 2 );
+			\add_filter( 'excerpt_length', array( $this, 'excerpt_length' ) );
+			\add_filter( 'excerpt_more', array( $this, 'except_more' ) );
+			\add_filter( 'upload_mimes', array( $this, 'mime_types' ) );
 		}
 
 		/**
@@ -112,7 +113,7 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 		/**
 		 * Return the custom excerpt length for the theme.
 		 *
-		 * @return  int Number of characters in the excerpt length.
+		 * @return int Number of characters in the excerpt length.
 		 */
 		public function excerpt_length() : int {
 			return 20;
@@ -145,8 +146,8 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 		 * Register the Widgets Sidebar.
 		 */
 		public function add_widgets() {
-			\register_sidebar( 
-				array( 
+			\register_sidebar(
+				array(
 					'name' => __( 'Wed Eng Widgets', 'wet' ),
 					'id'   => 'widgetId',
 					'before_widget' => '<article class="widget">',
@@ -161,7 +162,20 @@ if ( ! class_exists( 'WE_Theme' ) ) {
 		 * Add the Favicon
 		 */
 		public function add_favicon() {
-			echo '<link rel="shortcut icon" type="image/x-icon" href="' . get_template_directory_uri() . '/dist/img/favicon.ico" />';
+			echo '<link rel="icon" type="image/svg+xml" href="' . get_template_directory_uri() . '/dist/img/favicon.svg" />';
+			echo '<link rel="alternate icon" type="image/x-icon" href="' . get_template_directory_uri() . '/dist/img/favicon.ico" />';
+		}
+
+		/**
+		 * Allow SVG for file upload
+		 *
+		 * @param array $mimes Array of allowed mime types
+		 *
+		 * @return array New array of allowable mime types
+		 */
+		public function mime_types( array $mimes ) : array {
+			$mimes['svg'] = 'images/svg+xml';
+			return $mimes;
 		}
 	}
 

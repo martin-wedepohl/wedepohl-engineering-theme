@@ -16,7 +16,8 @@ h3,
 h4,
 h5,
 h6 {
-	margin: 1em auto;
+	margin: 0 auto;
+	padding: 1em 0;
 }
 
 p {
@@ -24,14 +25,10 @@ p {
 }
 
 .site-content {
-	margin: 1em auto;
+	margin: 0 auto;
 	max-width: var(--wet-max-width);
 	position: relative;
 	top: 0;
-}
-
-.site-main {
-	padding: 1em;
 }
 
 .entry-header,
@@ -48,13 +45,17 @@ p {
     font-weight: bold;
 }
 
+article {
+	padding: 0 1em;
+}
+
 @include mq(medium) {
 	.site-main {
 		min-height: calc(100vh - var(--wet-footer-height) - var(--wet-header-height));
 	}
 	
 	.admin-bar .site-main {
-		min-height: calc(100vh - var(--wet-footer-height) - var(--wet-admin-bar-padding) - var(--wet-header-height));
+		min-height: calc(100vh - var(--wet-footer-height) - var(--wet-admin-bar-wide-padding) - var(--wet-header-height));
 	}
 	
 	.site-content {

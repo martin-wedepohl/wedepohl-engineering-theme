@@ -126,7 +126,14 @@ const js = (done) => {
 
 const minifyImgs = () => {
 	return src(imgFiles)
-		.pipe(imagemin())
+		.pipe(imagemin([
+			imagemin.svgo({
+				plugins: [
+					{removeViewBox: false},
+					{cleanupIDs: false}
+				]
+			})
+		]))
 		.pipe(dest(distImgPath));
 }
 

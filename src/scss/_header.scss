@@ -7,6 +7,7 @@ header {
 	width: 100%;
 	z-index: 999;
 	background: var(--wet-header-color);
+	grid-template-columns: 1em auto minmax(500px, 4fr) 1em;
 }
 
 .home header {
@@ -14,9 +15,12 @@ header {
 }
 
 .site-branding {
+	flex-direction: row;
+	gap: 1em;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	width: 100vw;
+	padding-left: 1em;
+	justify-content: flex-end;
 	align-items: center;
 
 	h1 {
@@ -26,15 +30,34 @@ header {
 	p {
 		font-size: .7rem;
 	}
-}
 
-@media (min-width: 275px) {
-	.site-branding {
-		p {
-			font-size: .75rem;
+	& svg {
+		display: none;
+		height: 3rem;
+		width: 3rem;
+
+		& #gear {
+			animation: spin 8s linear infinite;
 		}
 	}
-} 
+}
+
+.site-logo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+		transform-origin: 50% 50%;
+	}
+	100% {
+		transform: rotate(360deg);
+		transform-origin: 50% 50%;
+	}
+}
 
 @media (min-width: 350px) {
 	.site-branding {
@@ -46,7 +69,20 @@ header {
 			font-size: 1rem;
 		}
 	}
-} 
+}
+
+@media (min-width: 430px) {
+	.site-branding {
+		width: 100vw;
+		justify-content: center;
+	}
+}
+
+@media (min-width: 535px) {
+	.site-branding svg {
+		display: unset;
+	}
+}
 
 @media (min-width: 850px) {
 	.admin-bar header {
@@ -58,6 +94,15 @@ header {
 		top: 0;
 		height: 3.5em;
 		justify-content: center;
-		grid-template-columns: 1em auto minmax(500px, 4fr) 1em;
+	}
+
+	.site-branding {
+		width: 100% !important;
+		padding-left: 0;
+		grid-column: 2 / 3;
+	}
+
+	.site-logo {
+		width: 100%;
 	}
 }
