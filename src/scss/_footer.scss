@@ -1,9 +1,10 @@
+@use 'mixins' as *;
+
 .site-footer {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	top: var(--wet-header-height);
 	position: relative;
 	background-color: var(--wet-footer-color);
 	height: var(--wet-footer-height);
@@ -42,7 +43,7 @@
 	}
 }
 
-@media (min-width: 850px) {
+@include mq(medium) {
 	.home .site-footer {
 		top: var(--wet-header-height-home);
 	}

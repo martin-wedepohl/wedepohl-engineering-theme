@@ -51,6 +51,6 @@ ul {
 
 @include mq(medium) {
 	html {
-		min-height: calc(100vh - var(--wet-admin-bar-wide-padding));
+		min-height: calc(100vh - var(--wet-header-height) - var(--wet-header-breadcrumb-height) - var(--wet-footer-height));
 	}
 }

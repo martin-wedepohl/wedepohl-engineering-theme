@@ -1,3 +1,5 @@
+@use 'mixins' as *;
+
 a.buttons {
 	&:hover,
 	&:focus {
@@ -19,7 +21,7 @@ a.buttons {
 	}
 }
 
-@media (min-width: 768px) {
+@include mq(small) {
 	.front-page-button {
 		&:hover,
 		&:focus {

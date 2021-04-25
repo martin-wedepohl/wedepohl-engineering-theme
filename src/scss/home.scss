@@ -2,6 +2,7 @@
 @use 'reset';
 @use 'mixins' as *;
 @use 'header';
+@use 'breadcrumbs';
 @use 'footer';
 @use 'taxonomies';
 @use 'menu';
@@ -71,20 +72,27 @@
 }
 
 @include mq(admin-bar) {
-	.home.admin-bar .site-main {
-		height: calc(100vh - var(--wet-footer-height) - var(--wet-admin-bar-wide-padding) - var(--wet-header-height-home));
+	.home {
+		& .site-main {
+			height: calc(100vh - var(--wet-footer-height) - var(--wet-header-height-home));
+		}
+		
+		&.admin-bar .site-main {
+			height: calc(100vh - var(--wet-footer-height) - var(--wet-admin-bar-wide-padding) - var(--wet-header-height-home));
+		}
 	}
+
 }
 
 @include mq(medium) {
 	.site-content {
 		position: relative;
-		top: var(--wet-header-height);
+		top: calc(var(--wet-header-height) + var(--wet-header-breadcrumb-height)) ;
 	}
 
 	.home .site-content {
 		position: relative;
-		top: var(--wet-header-height-home);
+		top: calc(var(--wet-header-height-home) + var(--wet-header-breadcrumb-height)) ;
 	}
 }
 

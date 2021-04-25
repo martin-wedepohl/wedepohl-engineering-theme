@@ -22,6 +22,18 @@
 	}
 }
 
+@include mq(x-small-2) {
+	body {
+		color: var(--wet-base-color);
+	}
+}
+
+@include mq(x-small-3) {
+	body {
+		color: var(--wet-base-color);
+	}
+}
+
 @include mq(small) {
 	body {
 		color: var(--wet-base-color);

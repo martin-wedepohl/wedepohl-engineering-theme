@@ -1,0 +1,14 @@
+@use 'mixins' as *;
+
+.site-breadcrumb {
+	grid-area: breadcrumbs;
+	margin: -1em auto 0 auto;
+	font-size: .8rem;
+}
+
+@include mq(medium) {
+	.site-breadcrumb {
+		grid-area: breadcrumbs;
+		margin: 0 0 0 auto;
+	}
+}

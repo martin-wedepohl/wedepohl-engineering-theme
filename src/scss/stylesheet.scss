@@ -2,6 +2,7 @@
 @use 'reset';
 @use 'mixins' as *;
 @use 'header';
+@use 'breadcrumbs';
 @use 'footer';
 @use 'taxonomies';
 @use 'menu';
@@ -25,10 +26,17 @@ p {
 }
 
 .site-content {
+	padding: 0 1em;
 	margin: 0 auto;
 	max-width: var(--wet-max-width);
 	position: relative;
 	top: 0;
+	min-height: calc(100vh - calc(var(--wet-footer-height) * 2) - var(--wet-header-height) - var(--wet-header-breadcrumb-height));
+	margin-bottom: var(--wet-footer-height);
+}
+
+.admin-bar .site-content {
+	min-height: calc(100vh - calc(var(--wet-footer-height) * 2) - var(--wet-header-height) - var(--wet-header-breadcrumb-height) - var(--wet-admin-bar-padding));
 }
 
 .entry-header,
@@ -49,17 +57,18 @@ article {
 	padding: 0 1em;
 }
 
-@include mq(medium) {
-	.site-main {
-		min-height: calc(100vh - var(--wet-footer-height) - var(--wet-header-height));
-	}
-	
-	.admin-bar .site-main {
-		min-height: calc(100vh - var(--wet-footer-height) - var(--wet-admin-bar-wide-padding) - var(--wet-header-height));
-	}
-	
+@include mq(admin-bar) {
 	.site-content {
-		position: relative;
-		top: var(--wet-header-height);
+		min-height: calc(100vh - calc(var(--wet-footer-height) * 2) - var(--wet-header-height) - var(--wet-header-breadcrumb-height));
+	}
+
+	.admin-bar .site-content {
+		min-height: calc(100vh - calc(var(--wet-footer-height) * 2) - var(--wet-header-height) - var(--wet-header-breadcrumb-height) - var(--wet-admin-bar-wide-padding));
+	}
+}
+
+@include mq(medium) {
+	.site-content {
+		margin-top: calc(var(--wet-header-height) + var(--wet-header-breadcrumb-height));
 	}
 }
